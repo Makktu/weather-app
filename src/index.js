@@ -1,5 +1,5 @@
-import getGif from './src/gifGet.js';
-import getUserLocation from './src/getLocation.js';
+import getGif from './gifGet.js';
+import getUserLocation from './getLocation.js';
 
 async function getWeather(location) {
     let lat = 52.41368;
