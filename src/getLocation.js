@@ -1,14 +1,28 @@
+export { lat, lon };
+
 export default async function getUserLocation() {
-    console.log('linked');
-
-    // if (navigator.geolocation) {
-    //     navigator.geolocation.getCurrentPosition;
-    // } else {
-    //     x.innerHTML = 'Geolocation is not supported by this browser.';
-    // }
+    if (navigator.geolocation) {
+        await navigator.geolocation.getCurrentPosition(
+            function (position) {
+                lat = position.coords.latitude;
+                lon = position.coords.longitude;
+                console.log(lat, lon);
+            },
+            function () {
+                alert('could not get location');
+            }
+        );
+    } else {
+        x.innerHTML = 'Geolocation is not supported by this browser.';
+    }
 }
 
-function position(pos) {
-    console.log('✅', pos);
-    return `${pos.coords.latitude + ' ' + pos.coords.longitude}`;
+function successCallback(position) {
+    console.log(position);
 }
+function errorCallback(error) {
+    console.log(error);
+}
+
+let lat = 0;
+let lon = 0;

@@ -1,16 +1,18 @@
 import getGif from './gifGet.js';
 import getUserLocation from './getLocation.js';
+import { lat, lon } from './getLocation.js';
 
-async function getWeather(location) {
-    let lat = 52.41368;
-    let lon = -1.503834;
+async function getWeather() {
     let placename = '';
     let whatTheWeatherIs = '';
     let theFahrenheit = 0;
     let theCelsius = 0;
     let searchTerm = '';
 
+    getUserLocation();
+
     try {
+        console.log(lat, lon, '<<<');
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=7ac5deb61b3a4bf48a75d86f3f69909b`,
             { mode: 'cors' }
@@ -46,5 +48,5 @@ async function getWeather(location) {
 }
 
 // * 7ac5deb61b3a4bf48a75d86f3f69909b my API key
-getUserLocation();
+
 getWeather();
