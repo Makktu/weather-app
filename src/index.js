@@ -1,18 +1,32 @@
 import getGif from './gifGet.js';
-import getUserLocation from './getLocation.js';
-import { lat, lon } from './getLocation.js';
 
-async function getWeather() {
-    let placename = '';
-    let whatTheWeatherIs = '';
-    let theFahrenheit = 0;
-    let theCelsius = 0;
-    let searchTerm = '';
+let placename = '';
+let whatTheWeatherIs = '';
+let theFahrenheit = 0;
+let theCelsius = 0;
+let searchTerm = '';
+let lat = 0;
+let lon = 0;
 
-    getUserLocation();
+async function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            await function (position) {
+                lat = position.coords.latitude;
+                lon = position.coords.longitude;
+                getWeather(lat, lon);
+            },
+            function () {
+                alert('could not get location');
+            }
+        );
+    } else {
+        console.log('Geolocation is not supported by this browser.');
+    }
+}
 
+async function getWeather(lat, lon) {
     try {
-        console.log(lat, lon, '<<<');
         const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=7ac5deb61b3a4bf48a75d86f3f69909b`,
             { mode: 'cors' }
@@ -45,8 +59,9 @@ async function getWeather() {
     }
 
     getGif(searchTerm);
+    console.log('➡️', searchTerm);
 }
 
-// * 7ac5deb61b3a4bf48a75d86f3f69909b my API key
+getLocation();
 
-getWeather();
+// * 7ac5deb61b3a4bf48a75d86f3f69909b my API key
