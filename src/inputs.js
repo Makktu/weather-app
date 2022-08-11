@@ -1,4 +1,5 @@
 import getLocation from './index.js';
+import getWeather from './index.js';
 
 let locationSearched;
 
@@ -17,7 +18,8 @@ export default function inputsInit() {
         if (inputField.value) {
             locationSearched = inputField.value;
             inputField.value = '';
-            console.log(locationSearched);
+            getWeather(0, 0, locationSearched);
+
             // ! get lat and lon of placename
             // ! if found, call showweather func directly
             // ! if not found, notify user
