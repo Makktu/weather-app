@@ -1,7 +1,6 @@
 import getLocation from './index.js';
-import getWeather from './index.js';
 
-let locationSearched;
+let locationSearched = '';
 
 export default function inputsInit() {
     const refreshBtn = document.getElementById('refresh-btn');
@@ -14,16 +13,10 @@ export default function inputsInit() {
 
     const findBtn = document.getElementById('search-btn');
     findBtn.addEventListener('click', () => {
-        console.log('clicked find');
         if (inputField.value) {
             locationSearched = inputField.value;
             inputField.value = '';
-            getWeather(0, 0, locationSearched);
-
-            // ! get lat and lon of placename
-            // ! if found, call showweather func directly
-            // ! if not found, notify user
-            // ! and... scene.
+            getLocation(locationSearched);
         }
     });
 }

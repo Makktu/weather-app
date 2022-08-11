@@ -1,4 +1,4 @@
-const msgArea = document.querySelector('.messages');
+export const msgArea = document.querySelector('.messages');
 
 export default function displayInfo(placename, whatTheWeatherIs, theKelvin) {
     let theCelsius = theKelvin - 273.15;
@@ -8,7 +8,6 @@ export default function displayInfo(placename, whatTheWeatherIs, theKelvin) {
     if (+todayNow.getMinutes() < 10) {
         // carry out surgery here
     }
-    console.log(typeof theGivenTime);
     msgArea.innerHTML = `<p><span style="color:cyan;font-size:2.5rem;">${placename}:</span><br>${whatTheWeatherIs}<br>${theCelsius.toFixed(
         1
     )}C / ${theFahrenheit.toFixed(
